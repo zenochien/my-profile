@@ -1,15 +1,13 @@
 import React from 'react';
-import Profile from './components/Profile';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import CustomAppLayout from './components/CustomAppLayout';
+import "@cloudscape-design/global-styles/index.css"
 
 function App() {
   return (
     <div>
-      <AmplifySignOut />
-      <h1>My Profile</h1>
-      <Profile />
+      <CustomAppLayout />
     </div>
   );
 }
 
-export default withAuthenticator(App);
+export default App;

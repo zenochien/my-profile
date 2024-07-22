@@ -151,6 +151,18 @@
           "Ref": "UnauthRoleName"
         }
       }
+    },
+    "apimyprofile": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-myprofile-dev-ba135-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "myprofile",
+          "S3DeploymentBucket": "amplify-myprofile-dev-ba135-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/23abe05894bd5fff890ffc8d9e5234323edb4132",
+          "env": "dev"
+        }
+      }
     }
   }
 }
