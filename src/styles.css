@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: gray;
+}
+
+.hidden-button {
+    display: none;
+}
+
+.hidden-button.hidden {
+    display: block;
+}
