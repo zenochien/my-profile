@@ -18,6 +18,9 @@ import ProfilePage from "./page/myprofile";
 import Logins from "./page/signinup/Login";
 import Registers from "./page/signinup/Register";
 
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
 export const AuthContext = createContext();
 
 export default function App() {
@@ -82,39 +85,40 @@ export default function App() {
   };
 
 
-
   return (
-    <AuthContext.Provider value={{ registrationSuccess, setRegistrationSuccess, loginSuccess, setLoginSuccess }}>
-
-      <TopNavigationComponent />
-      <AppLayout
-        navigationOpen={isNavigationOpen}
-        toolsHide={isToolsHidden}
-        onNavigationChange={() => setIsNavigationOpen(!isNavigationOpen)}
-        onToolsChange={() => setIsToolsHidden(!isToolsHidden)}
-        navigation={<Navigation />}
-        contentHeader={<CustomHomeHeader />}
-        content={
-          <>
-            <BreadcrumbGroup items={getBreadcrumbItems()} />
-            <Routes>
-              <Route path="/home" element={<Home setContentHeader={setContentHeader} />} />
-              <Route path="/checktext" element={<CheckText setContentHeader={setContentHeader} />} />
-              <Route path="/signinup" element={<SignInUp setContentHeader={setContentHeader} />} />
-              <Route path="/uploaddownload" element={<UploadAndDownmload setContentHeader={setContentHeader} />} />
-              <Route path="/datatable" element={<DataTable setContentHeader={setContentHeader} />} />
-              <Route path="/creates3" element={<CreateS3 setContentHeader={setContentHeader} />} />
-              <Route path="/runs3" element={<RunS3 setContentHeader={setContentHeader} />} />
-              <Route path="/events/contentdashboard" element={<Contentdashboard setContentHeader={setContentHeader} />} />
-              <Route path="/myprofile" element={<ProfilePage setContentHeader={setContentHeader} />} />
-              <Route path="/signinup/Register" element={<Registers setContentHeader={setContentHeader} />} />
-              <Route path="/signinup/Login" element={<Logins setContentHeader={setContentHeader} />} />
-
-              <Route exact path="/" element={<Navigate to="/signinup/login" />} />
-            </Routes>
-          </>
-        }
-      />
-    </AuthContext.Provider>
+    <Authenticator>
+      {({ signOut }) => (
+        <>
+          <TopNavigationComponent />
+          <AppLayout
+            navigationOpen={isNavigationOpen}
+            toolsHide={isToolsHidden}
+            onNavigationChange={() => setIsNavigationOpen(!isNavigationOpen)}
+            onToolsChange={() => setIsToolsHidden(!isToolsHidden)}
+            navigation={<Navigation />}
+            contentHeader={<CustomHomeHeader />}
+            content={
+              <>
+                <BreadcrumbGroup items={getBreadcrumbItems()} />
+                <Routes>
+                  <Route path="/home" element={<Home setContentHeader={setContentHeader} />} />
+                  <Route path="/checktext" element={<CheckText setContentHeader={setContentHeader} />} />
+                  <Route path="/signinup" element={<SignInUp setContentHeader={setContentHeader} />} />
+                  <Route path="/uploaddownload" element={<UploadAndDownmload setContentHeader={setContentHeader} />} />
+                  <Route path="/datatable" element={<DataTable setContentHeader={setContentHeader} />} />
+                  <Route path="/creates3" element={<CreateS3 setContentHeader={setContentHeader} />} />
+                  <Route path="/runs3" element={<RunS3 setContentHeader={setContentHeader} />} />
+                  <Route path="/events/contentdashboard" element={<Contentdashboard setContentHeader={setContentHeader} />} />
+                  <Route path="/myprofile" element={<ProfilePage setContentHeader={setContentHeader} />} />
+                  <Route path="/signinup/Register" element={<Registers setContentHeader={setContentHeader} />} />
+                  <Route path="/signinup/Login" element={<Logins setContentHeader={setContentHeader} />} />
+                  <Route path="/" element={<Navigate to="/signinup/login" />} />
+                </Routes>
+              </>
+            }
+          />
+        </>
+      )}
+    </Authenticator>
   );
 }
